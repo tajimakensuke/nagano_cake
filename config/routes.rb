@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   root to:'homes#top'
-  devise_for :customers
 
+  devise_for :admin, controllers: {
+  sessions:      'admin/sessions',
+  passwords:     'admin/passwords',
+  registrations: 'admin/registrations'
+  }
+  devise_for :customers
 
   resources :homes, only: [:index]do
     collection do
