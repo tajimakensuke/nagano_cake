@@ -29,9 +29,10 @@
     <td>郵便番号</td>
     <td>住所</td>
     <td>宛名</td>
+    <td></td>
   </tr>
 
-<% Address.all.each do |address| %>
+  <% @addresses.each do |address| %>
     <tr>
       <td>
       <%= address.postal_code %>
@@ -42,6 +43,10 @@
       <td>
       <%= address.name %>
       </td>
+      <td>
+        <%= link_to "編集", edit_address_path(address), class: "btn btn-success mb-3 text-white"%>
+        <%= link_to "削除", address_path(address), method: :delete, class:"btn btn-danger  mb-3 text-white "%>
+        </td>
     </tr>
-    <% end %>
+  <% end %>
 </table>

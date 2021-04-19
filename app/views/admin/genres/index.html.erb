@@ -1,0 +1,26 @@
+<div class="col-md-4">
+  <h2 class="bg-secondary text-white text-center">ジャンル一覧・追加</h2>
+</div>
+
+<div class="genre_new">
+  <%= form_with modle: @genre do |f| %>
+  <table>
+    <tr>
+      <td>ジャンル名</td>
+      <td> <%= f.text_field :name %></td>
+      <td><%= f.submit "新規登録", class: 'btn btn-success btn-block' %></td>
+    </tr>
+  </table>
+  <% end %>
+</div>
+
+<div class="genre_index">
+
+  <% @genres.each do |genre| %>
+   <table>
+     <tr>
+       <td><%= genre.name %></td>
+       <td><%= link_to "編集する", edit_admin_genre_path(genre), class:"btn btn-success mb-3 text-white" %></td>
+     </tr>
+   </table>
+   <% end %>
