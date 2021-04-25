@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   }
   devise_for :customers
 
+  resources :items, only: [:index, :show]
+
   resources :homes, only: [:index]do
     collection do
       get :about

@@ -1,12 +1,12 @@
 <div class="col-md-2">
-  <h2 class="bg-secondary text-white text-center">商品新規登録</h2>
+  <h2 class="bg-secondary text-white text-center">商品編集</h2>
 </div>
 
-
-<div class="item_new">
-<%= form_with model: @item, url:admin_items_path, method: :post, local: true do |f| %>
+<div class="item_edit ">
+<%= form_with model: @item, url:admin_item_path, method: :patch, local: true do |f| %>
 <div class="row">
   <div class= "col-md-4">商品画像</div>
+
   <div class= "col-md-4"><%= f.attachment_field :image %></div>
 </div>
 
@@ -23,19 +23,19 @@
 <div class="row">
   <div class= "col-md-4">ジャンル</div>
   <div class= "col-md-4"> <%= f.collection_select(:genre_id, @genre, :id, :name) %></div>
-  </div>
+</div>
 
 <div class="row">
   <div class= "col-md-4">税抜き価格</div>
-  <div class= "col-md-4"> <%= f.text_field :price %></div>
+  <div class= "col-md-4"> <%= f.text_field :price %>円</div>
 </div>
 
 <div class="row">
   <div class= "col-md-4">販売ステータス</div>
-    <div class= "col-md-1"><%= f.radio_button(:is_active, :true ) %>販売中</div>
-    <div class= "col-md-1"><%= f.radio_button(:is_active, :false ) %>販売停止中</div>
+    <div class= "col-md-1"> <%= f.radio_button(:is_active, :true ) %>販売中</div>
+    <div class= "col-md-1"> <%= f.radio_button(:is_active, :false ) %>販売停止中</div>
 </div>
 
-<%= f.submit "新規登録", class: 'btn btn-success btn-block mb-3 col-md-2' %>
+<%= f.submit "新規登録", class: 'btn btn-success btn-block mb-3 col-md-2 ' %>
 <% end %>
 </div>
