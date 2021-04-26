@@ -1,0 +1,19 @@
+<div class = "container">
+    <div class "row mx-auto m-3" >
+      <h2>注文情報入力</h2>
+    </div>
+</div>
+
+<div>
+  <h2>支払い方法</h2>
+  <%= form_with model: @order, url: comfirm_orders_path, method: :post, local: true do |f| %>
+    <div class= "col-md-1"><%= f.radio_button(:payment_method, :true ) %>クレジットカード</div>
+    <div class= "col-md-1"><%= f.radio_button(:payment_method, :false ) %>銀行振込</div>
+  <h2>お届け先</h2>
+    <div class= "col-md-1"><%= f.radio_button(:address, :true ) %>ご自身の住所</div>
+    <div><%= current_customer.address %></div>
+    <div class= "col-md-1"><%= f.radio_button(:address, :true ) %>登録済み住所から選択</div>
+    <div><%= f.collection_select(:address, @address, :id, :address) %></div>
+  <%= f.submit "新規登録", class: 'btn btn-success mb-3' %>
+</div>
+<% end %>

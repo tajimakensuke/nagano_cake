@@ -1,4 +1,4 @@
-<div class " mx-auto m-3" >
+<div class = " mx-auto m-3" >
   <h2>商品一覧</h2>
 </div>
 
@@ -13,4 +13,11 @@
           <div><%= @item.introduction %></div>
           <div>￥<%= @item.price %>(税込)</div>
       </div>
+    </div>
+
+    <div>
+        <%= form_with model: @cart_item, url:cart_items_path(:item_id=>@item.id), method: :post, local: true do |f| %>
+        <div><%= f.select :amount, [1,2,3,4,5,6,7,8,9,10] %></div>
+        <div><%= f.submit "カートに入れる", class: 'btn btn-success btn-block mb-3 col-md-2' %></div>
+        <% end %>
     </div>
