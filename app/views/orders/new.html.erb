@@ -12,20 +12,20 @@
 
   <h2>お届け先</h2>
     <div class= "col-md-12"><%= f.radio_button :address_option, 1 %>ご自身の住所</div>
-    <div><%= current_customer.address %></div>
+    <div><%= current_customer.address %>
     <% current_customer.postal_code %>
     <% current_customer.last_name %>
-    <% current_customer.first_name %>
+    <% current_customer.first_name %></div>
 
     <div class= "col-md-12"><%= f.radio_button :address_option, 2 %>登録済み住所から選択</div>
-    <div><%= f.collection_select(:address, @address, :id, :address ) %></div>
+    <div><%= f.collection_select(:address, @address, :id, :view_name_and_id ) %></div>
 
 
     <div class= "col-md-12"><%= f.radio_button :address_option, 3 %>新しいお届け先</div>
 
     <div class = "row">
     <label class= "col-md-12">郵便番号</label>
-    <div class = "col-md-12"><%= f.text_field :postal_code, autofocus: true %></div>
+    <div class = "col-md-12"><%= f.text_field :postal_code %></div>
     </div>
 
     <div class = "row">

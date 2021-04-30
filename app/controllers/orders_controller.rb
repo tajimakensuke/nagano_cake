@@ -5,9 +5,10 @@ class OrdersController < ApplicationController
   end
 
   def comfirm
-    @order = Order.new(order_params)
+    @order = Order.new
+    @orders = Order.find(params[:id])
     @order.customer_id = current_customer.id
-      
+
   end
 
 
