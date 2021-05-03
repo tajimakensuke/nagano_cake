@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2021_04_17_150931) do
     t.integer "item_id"
     t.integer "customer_id"
     t.integer "amount"
-    t.datetime "created_at", null: falsecd
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 

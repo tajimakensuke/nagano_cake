@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  root to:'homes#top'
 
+  root to:'public/homes#top'
   devise_for :admin, controllers: {
   sessions:      'admin/sessions',
   passwords:     'admin/passwords',
@@ -8,31 +8,39 @@ Rails.application.routes.draw do
   }
   devise_for :customers
 
-  resources :items, only: [:index, :show]
 
-  resources :homes, only: [:index]do
-    collection do
-      get :about
+  scope module: :public do
+    resources :items, only: [:index, :show]
+    resources :homes, only: [:index]do
+      collection do
+        get :about
+        get :top
+      end
     end
-  end
-  resources :customers, only: [:show, :edit, :update]do
-    member do
-      get :unsubcribe
-      patch :withdraw
+
+    resources :customers, only: [:show, :edit, :update]do
+      member do
+        get :unsubcribe
+        patch :withdraw
+      end
     end
-  end
-  resources :cart_items, only: [:index, :update, :destroy, :create]do
-    member do
-      delete :destroy_all
+
+    resources :cart_items, only: [:index, :update, :destroy, :create]do
+      collection do
+        delete :destroy_all
+      end
     end
-  end
-  resources :orders, only: [:new, :create, :index, :show]do
-    collection do
-      post :comfirm
-      get :complete
+
+    resources :orders, only: [:new, :create, :index, :show]do
+      collection do
+        post :comfirm
+        get :complete
+      end
     end
-  end
-  resources :addresses, only: [:index, :edit, :create, :update, :destroy]
+
+    resources :addresses, only: [:index, :edit, :create, :update, :destroy]
+
+   end
 
   namespace :admin do
     resources :homes, only: [:index]
@@ -42,4 +50,6 @@ Rails.application.routes.draw do
     resources :orders, only: [:show, :update]
     resources :order_details, only: [:update]
     end
+
   end
+

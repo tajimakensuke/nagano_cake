@@ -1,0 +1,92 @@
+<div class = "container">
+    <div class "row mx-auto m-3" >
+      <h2>注文情報確認</h2>
+    </div>
+
+  <div class ="row">
+    <div class = "col-md-8">
+      <table class = "table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <td>商品名</td>
+            <td>単価（税込み）</td>
+            <td>数量</td>
+            <td>小計</td>
+          </tr>
+        </thead>
+
+      <% @cart_items.each do |cart_item| %>
+      <% @total += cart_item.item.price * cart_item.amount %>
+      <tr>
+        <td><%= cart_item.item.name %></td>
+        <td><%= cart_item.item.price %></td>
+        <td><%= cart_item.amount %></td>
+        <td><%= cart_item.item.price * cart_item.amount %></td>
+      </tr>
+      <% end %>
+      </table>
+    </div>
+
+
+
+
+    <div class ="col-md-4">
+      <table class = "table table-bordered">
+        <tr>
+          <td>送料</td>
+          <td>800</td>
+        </tr>
+        <tr>
+          <td>商品合計</td>
+          <td> <%= @total %></td>
+
+        </tr>
+          <td>請求金額</td>
+          <td><%= @total + 800 %> </td>
+
+        </tr>
+      </table>
+    </div>
+  </div>
+
+
+
+
+  <div class = "row mt-3">
+    <h5 class = "col-md-3 " >支払い方法</h5>
+
+    <% if @order.payment_method == "credit" %>
+    <p class = "col-md-3">
+      <%= "クレジットカード" %></p>
+    <% elsif %>
+      <%= "銀行振込" %>
+    <% end %>
+  </div>
+
+  <div class = "row mt-3">
+    <h5 class = "col-md-3 " >お届け先</h5>
+    <p class = "col-md-9">〒<%= @order.postal_code %> <%= @order.address %>
+    </br><%= @order.name %></p>
+  </div>
+    <%= form_with model:@order, url:orders_path, method: :post, local:true do |f| %>
+    <%= f.hidden_field :total_payment %>
+    <%= f.hidden_field :shipping_cost %>
+    <%= f.hidden_field :payment_method %>
+    <%= f.hidden_field :customer_id %>
+    <%= f.hidden_field :postal_code %>
+    <%= f.hidden_field :address %>
+    <%= f.hidden_field :name %>
+    <%= f.hidden_field :status %>
+
+
+  <%= f.submit "注文を確定する", class: 'btn btn-success' %>
+　<% end %>
+
+
+
+
+
+
+
+</div>
+
