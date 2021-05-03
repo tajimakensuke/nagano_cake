@@ -1,0 +1,88 @@
+<div class = "container">
+    <div class "row mx-auto m-3" >
+      <h2>注文履歴詳細</h2>
+    </div>
+
+  <div class = "row" >
+    <div class ="col-md-7" >
+      <p>注文情報</p>
+      <table class = "table table-bordered">
+        <tr>
+          <th>注文日</th>
+          <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+        </tr>
+        <tr>
+          <th>配送先</th>
+          <td>〒<%= @order.postal_code %>
+              </br><%= @order.address %>
+              </br><%= @order.name %>
+          </td>
+        </tr>
+        <tr>
+          <th>支払方法</th>
+          <% if @order.payment_method == "credit" %>
+            <td><%= "クレジットカード" %></td>
+          <% elsif %>
+            <td><%= "銀行振込" %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <th>ステータス</th>
+          <% if @order.status == "waiting" %>
+            <td><%= "入金待ち" %></td>
+          <% elsif @order.status == "confirmation" %>
+            <td><%= "入金確認" %></td>
+          <% elsif @order.status == "creating" %>
+            <td><%= "作成中" %></td>
+          <% elsif @order.status == "ready" %>
+            <td><%= "発送準備中" %></td>
+          <% end %>
+        </tr>
+      </table>
+    </div>
+
+    <div class ="col-md-4">
+      <p>請求情報</p>
+      <table class = "table table-bordered" >
+        <tr>
+          <th>商品合計</th>
+          <td><%= @order.total_payment - 800 %></td>
+        </tr>
+        <tr>
+          <th>配送料</th>
+          <td><%= @order.shipping_cost %></td>
+        </tr>
+        <tr>
+          <th>ご請求額</th>
+          <td><%= @order.total_payment %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class = "col-md-9">
+    <p>注文内容</p>
+    <table class = "table table-bordered">
+      <tr>
+        <th>商品</th>
+        <th>単価（税込）</th>
+        <th>個数</th>
+        <th>小計</th>
+      </tr>
+      <% @order.orders_details.each do |orders_detail| %>
+      <tr>
+
+        <td><%= orders_detail.item.name %></td>
+        <td><%= orders_detail.price %></td>
+        <td><%= orders_detail.amount %></td>
+        <td><%= orders_detail.price * orders_detail.amount %></td>
+
+      </tr>
+      <% end %>
+    </table>
+  </div>
+
+
+
+</div>
+

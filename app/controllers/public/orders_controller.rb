@@ -1,4 +1,5 @@
 class Public::OrdersController < ApplicationController
+
   def new
     @addresses =current_customer.addresses
     @order = Order.new
@@ -13,9 +14,6 @@ class Public::OrdersController < ApplicationController
     @cart_items.each do |cart_item|
     @total += cart_item.item.price * cart_item.amount
     @order.status = :waiting
-
-
-
     end
     @order.shipping_cost = 800
     @order.total_payment = @total + 800
@@ -60,9 +58,15 @@ class Public::OrdersController < ApplicationController
   def complete
   end
 
+
   def index
 
     @orders = Order.all
+  end
+
+  def show
+    @order = Order.find(params[:id])
+    @order_details = OrdersDetail.all
   end
 
 
