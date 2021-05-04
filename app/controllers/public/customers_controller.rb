@@ -1,15 +1,15 @@
 class Public::CustomersController < ApplicationController
 
   def  show
-    @customer = Customer.find(params[:id])
+    @customer = Customer.find(current_customer.id)
   end
 
   def edit
-    @customer = Customer.find(params[:id])
+    @customer = Customer.find(current_customer.id)
   end
 
   def update
-    @customer = Customer.find(params[:id])
+    @customer = Customer.find(current_customer.id)
 
     if @customer.update(customer_params)
     flash[:notice] = "You have updated book successfully."
@@ -26,7 +26,8 @@ class Public::CustomersController < ApplicationController
 
   def withdraw
     @customer = Customer.find(current_customer.id)
-    @customer.update(is_deleted: "Invalid")
+    @customer.update(is_deleted: "true")
+    @customer.destroy
     reset_session
     redirect_to root_path
   end
@@ -34,7 +35,7 @@ class Public::CustomersController < ApplicationController
 private
   def customer_params
     params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana,
-    :postal_code, :address, :telephone_number, :email)
+    :postal_code, :address, :telephone_number, :email, :is_deleted)
   end
 
 end
