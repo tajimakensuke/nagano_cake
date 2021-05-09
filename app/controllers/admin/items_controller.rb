@@ -1,9 +1,10 @@
 class Admin::ItemsController < ApplicationController
 
+   before_action :authenticate_admin!,except: [:top]
+
   def index
     @item = Item.new
     @items = Item.all
-
   end
 
   def new
@@ -28,7 +29,9 @@ class Admin::ItemsController < ApplicationController
   end
 
   def update
-
+    @item = Item.find(params[:id])
+    @item.update(item_params)
+      redirect_to admin_items_path
   end
 
 

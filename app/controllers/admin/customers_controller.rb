@@ -1,7 +1,9 @@
 class Admin::CustomersController < ApplicationController
 
+  before_action :authenticate_admin!,except: [:top]
+
   def index
-    @customers = Customer.all
+    @customers = Customer.with_deleted
   end
 
   def show

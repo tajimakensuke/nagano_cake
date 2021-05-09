@@ -56,3 +56,5 @@ gem "refile-mini_magick"
 gem 'pry-byebug', group: :development
 gem 'kaminari'
 gem 'paranoia'
+gem 'enum_help'
+gem 'rails-i18n'

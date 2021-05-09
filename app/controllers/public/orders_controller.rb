@@ -1,5 +1,7 @@
 class Public::OrdersController < ApplicationController
 
+  before_action :authenticate_customer!,except: [:top]
+
   def new
     @addresses =current_customer.addresses
     @order = Order.new
@@ -61,7 +63,7 @@ class Public::OrdersController < ApplicationController
 
   def index
 
-    @orders = Order.all
+    @orders = Order.where(id: current_customer.id)
   end
 
   def show

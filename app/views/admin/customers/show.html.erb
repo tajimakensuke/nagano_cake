@@ -1,14 +1,13 @@
 <div class = "container">
-  <div class="mx-auto">
-    <h2 class="bg-secondary text-white text-center">
-      <%= @customer.first_name %><%=@customer.last_name %> さんの会員詳細</h2>
-  </div>
+    <div class "row mx-auto m-3" >
+      <h2> <%= @customer.first_name %><%=@customer.last_name %> さんの会員詳細</h2>
+    </div>
 
 
   <!--main-->
 
-  <div class = "mx-auto" >
-    <table>
+  <div class = "col-md-9" >
+    <table class = "table">
       <tr>
         <td>会員ID</td>
         <td><%= @customer.id %></td>
@@ -40,10 +39,10 @@
       <tr>
         <td>会員ステータス</td>
         <td>
-          <% if @customer.is_deleted == true %>
-          有効
+          <% if @customer.is_deleted == false %>
+          <P class = "text-success" >有効</P>
         <% else %>
-          退会
+          <P class = "text-secondary" >退会</P>
         <% end %>
         </td>
       </tr>

@@ -1,7 +1,9 @@
 class Public::AddressesController < ApplicationController
 
+  before_action :authenticate_customer!,except: [:top]
+
   def index
-    @addresses = Address.all
+    @addresses = Address.where(id: current_customer.id)
     @address = Address.new
   end
 
@@ -9,9 +11,12 @@ class Public::AddressesController < ApplicationController
     @address = Address.new(address_params)
     @address.customer_id = current_customer.id
 
-    @address.save
-      redirect_to addresses_path, notice: 'Task is create'
-
+    if @address.save
+      redirect_to addresses_path
+    else
+      @addresses = Address.where(id: current_customer.id)
+      render :index
+    end
   end
 
   def edit
@@ -21,8 +26,11 @@ class Public::AddressesController < ApplicationController
   def update
     @address = Address.find(params[:id])
 
-    @address.update(address_params)
+    if @address.update(address_params)
       redirect_to addresses_path
+    else
+      render :edit
+    end
   end
 
   def destroy
