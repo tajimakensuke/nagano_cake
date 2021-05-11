@@ -28,18 +28,15 @@
         <% end %>
         </td>
         <td><%= order.total_payment %></td>
-
-
-
         <% if order.status == "waiting" %>
-          <td><%= "入金待ち" %></td>
-        <% elsif order.status == "confirmation" %>
-          <td><%= "入金確認" %></td>
-        <% elsif order.status == "creating" %>
-          <td><%= "作成中" %></td>
-        <% elsif order.status == "ready" %>
-          <td><%= "発送準備中" %></td>
-        <% end %>
+            <td><%= "入金待ち" %></td>
+          <% elsif order.status == "confirmation" %>
+            <td><%= "入金確認" %></td>
+          <% elsif order.status == "creating" %>
+            <td><%= "作成中" %></td>
+          <% else order.status == "ready" %>
+            <td><%= "発送準備中" %></td>
+          <% end %>
 
         <td><%= link_to "表示する", order_path(order.id) %></td>
 

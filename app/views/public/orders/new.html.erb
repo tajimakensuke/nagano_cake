@@ -10,43 +10,44 @@
   <h2 class="bg-secondary text-white">注文情報入力</h2>
   </div>
 
-
-<div>
-  <h2>支払い方法</h2>
-    <div class = "mx-auto">
+  
+  <div>
     <%= form_with model: @order, url: comfirm_orders_path, method: :post, local: true do |f| %>
-      <div><%= f.radio_button :payment_method, :credit %>クレジットカード</div>
-      <div><%= f.radio_button :payment_method, :bank %>銀行振込</div>
-    </div>
-
-  <h2 class ="mt-2">お届け先</h2>
-    <div class = "mx-auto">
-      <div><%= f.radio_button :address_option, 1 %>ご自身の住所</div>
-      <div>〒<%= current_customer.postal_code %>　<%= current_customer.address %>
-      </br><%= @name %></div>
-    </div>
-
-    <div class = "mx-auto mt-2">
-      <div><%= f.radio_button :address_option, 2 %>登録済み住所から選択</div>
-      <div><%= f.collection_select(:address_collection, @addresses, :id, :view_name_and_id ) %></div>
-    </div>
-
-
-
-    <div class= "mx-auto mt-3">
-      <div><%= f.radio_button :address_option, 3 %>新しいお届け先</div>
-        <div>郵便番号</div>
-        <div><%= f.text_field :postal_code %></div>
-
-        <div>住所</div>
-        <div><%= f.text_field :address %></div>
-
-        <div>宛名</div>
-        <div><%= f.text_field :name %></div>
-        <%= f.submit "確認画面にすすむ", class: 'btn btn-success mt-3' %>
-    </div>
-        <% end %>
-</div>
+    <h2>支払い方法</h2>
+      <div class = "mx-auto">
+  
+        <div><%= f.radio_button :payment_method, :credit %>クレジットカード</div>
+        <div><%= f.radio_button :payment_method, :bank %>銀行振込</div>
+      </div>
+  
+    <h2 class ="mt-2">お届け先</h2>
+      <div class = "mx-auto">
+        <div><%= f.radio_button :address_option, 1 %>ご自身の住所</div>
+        <div>〒<%= current_customer.postal_code %>　<%= current_customer.address %>
+        </br><%= @name %></div>
+      </div>
+  
+      <div class = "mx-auto mt-2">
+        <div><%= f.radio_button :address_option, 2 %>登録済み住所から選択</div>
+        <div><%= f.collection_select(:address_collection, @addresses, :id, :view_name_and_id ) %></div>
+      </div>
+  
+  
+  
+      <div class= "mx-auto mt-3">
+        <div><%= f.radio_button :address_option, 3 %>新しいお届け先</div>
+          <div>郵便番号</div>
+          <div><%= f.text_field :postal_code %></div>
+  
+          <div>住所</div>
+          <div><%= f.text_field :address %></div>
+  
+          <div>宛名</div>
+          <div><%= f.text_field :name %></div>
+          <%= f.submit "確認画面にすすむ", class: 'btn btn-success mt-3' %>
+      </div>
+          <% end %>
+  </div>
 
 
 

@@ -3,7 +3,7 @@ class Public::AddressesController < ApplicationController
   before_action :authenticate_customer!,except: [:top]
 
   def index
-    @addresses = Address.where(id: current_customer.id)
+    @addresses = current_customer.addresses
     @address = Address.new
   end
 
@@ -14,7 +14,7 @@ class Public::AddressesController < ApplicationController
     if @address.save
       redirect_to addresses_path
     else
-      @addresses = Address.where(id: current_customer.id)
+      @addresses = current_customer.addresses
       render :index
     end
   end

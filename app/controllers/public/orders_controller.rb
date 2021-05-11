@@ -15,7 +15,6 @@ class Public::OrdersController < ApplicationController
 
     @total = 0
     @cart_items.each do |cart_item|
-    @total += cart_item.item.price * cart_item.amount
     end
     @order.status = :waiting
 
@@ -71,8 +70,7 @@ class Public::OrdersController < ApplicationController
 
 
   def index
-
-    @orders = Order.where(id: current_customer.id)
+  @orders = Order.where(customer_id: current_customer.id)
   end
 
   def show

@@ -4,9 +4,11 @@ class Admin::OrderDetailsController < ApplicationController
 
 
   def update
+    puts params[:id]
     @orders_detail = OrdersDetail.find(params[:id])
       @orders_detail.update(orders_detail_params)
-        redirect_to admin_order_path(@orders_detail.order)
+        redirect_to request.referer
+
 
   end
 
