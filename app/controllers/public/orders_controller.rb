@@ -12,11 +12,14 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
     @cart_items = current_customer.cart_items
+
     @total = 0
     @cart_items.each do |cart_item|
     @total += cart_item.item.price * cart_item.amount
-    @order.status = :waiting
     end
+    @order.status = :waiting
+
+
     @order.shipping_cost = 800
     @order.total_payment = @total + 800
 
@@ -39,22 +42,28 @@ class Public::OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-    @order.save
     @cart_items = current_customer.cart_items
 
+    if @order.save
+      @cart_items.each do |cart_item|
+      @order_detail = OrdersDetail.new
+      @order_detail.order_id = @order.id
+      @order_detail.item_id = cart_item.item_id
+      @order_detail.amount = cart_item.amount
+      @order_detail.price = cart_item.item.price
+      @order_detail.making_status = :impossible
+      @order_detail.save
+      end
 
-    @cart_items.each do |cart_item|
-    @order_detail = OrdersDetail.new
-    @order_detail.order_id = @order.id
-    @order_detail.item_id = cart_item.item_id
-    @order_detail.amount = cart_item.amount
-    @order_detail.price = cart_item.item.price
-    @order_detail.making_status = :impossible
-    @order_detail.save
+
+    else
+      @addresses = current_customer.addresses
+      render :new and return
     end
 
+
     @cart_items.destroy_all
-      redirect_to complete_orders_path
+      redirect_to complete_orders_path and return
   end
 
   def complete

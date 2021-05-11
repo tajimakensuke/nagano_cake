@@ -1,18 +1,25 @@
+<% if @genre.errors.any? %>
+  <%= @genre.errors.count %>件のエラーが発生しました
+  <% @genre.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+<% end %>
+
+
 <div class="container">
-  <div class = "mx-auto m-3" >
-      <h2>ジャンル一覧・追加</h2>
+  <div class = "row mt-3 text-left" >
+      <h2 class="bg-secondary text-white">ジャンル一覧・追加</h2>
   </div>
 
-
-  <div calss = "mx-auto ">
-    <%= form_with modle: @genre do |f| %>
-    <table>
-      <tr>
-        <th>ジャンル名</th>
-        <td> <%= f.text_field :name %></td>
-        <td><%= f.submit "新規登録", class: 'btn btn-success btn-block' %></td>
-      </tr>
-    </table>
+  <div calss="mx-auto ">
+    <%= form_with model: @genre, url:admin_genres_path, method: :post do |f| %>
+      <table>
+        <tr>
+          <th>ジャンル名</th>
+          <td><%= f.text_field :name %></td>
+          <td><%= f.submit "新規登録", class: 'btn btn-success' %></td>
+        </tr>
+      </table>
     <% end %>
   </div>
 

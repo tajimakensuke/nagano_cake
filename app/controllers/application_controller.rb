@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:address])
     devise_parameter_sanitizer.permit(:sign_up, keys: [:telephone_number])
     devise_parameter_sanitizer.permit(:sign_up, keys: [:last_name_kana])
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name_kana_name])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name_kana])
   end
 
 end

@@ -1,23 +1,29 @@
-<div class = " mx-auto m-3" >
-  <h2>商品一覧</h2>
-</div>
+<div class = "container">
+    <div class = "row text-left mt-3" >
+      <h2 class = "bg-secondary text-white">商品詳細</h2>
+    </div>
+
+
 
 
     <div class = "row">
-        <div class = "col-4">
+        <div class = "col-md-4">
             <div><%= attachment_image_tag @item, :image, :fill, 250, 250, format: 'jpeg'%></div>
         </div>
 
-      <div class = "col-4">
-          <div><%= @item.name %></div>
-          <div><%= @item.introduction %></div>
-          <div>￥<%= @item.price %>(税込)</div>
+      <div class = "col-md-8">
+          <h4><%= @item.name %></h4>
+          <p><%= @item.introduction %></p>
+          <h4>￥<%= @item.price %>(税込)</h4>
+          <div>
+            <%= form_with model: @cart_item, url:cart_items_path(:item_id=>@item.id), method: :post, local: true do |f| %>
+            <div><%= f.select :amount, [1,2,3,4,5,6,7,8,9,10],{include_blank: '個数選択'} %></div>
+            <div><%= f.submit "カートに入れる", class: 'btn btn-success' %></div>
+            <% end %>
+          </div>
+
       </div>
     </div>
 
-    <div>
-        <%= form_with model: @cart_item, url:cart_items_path(:item_id=>@item.id), method: :post, local: true do |f| %>
-        <div><%= f.select :amount, [1,2,3,4,5,6,7,8,9,10] %></div>
-        <div><%= f.submit "カートに入れる", class: 'btn btn-success btn-block mb-3 col-md-2' %></div>
-        <% end %>
-    </div>
+
+</div>

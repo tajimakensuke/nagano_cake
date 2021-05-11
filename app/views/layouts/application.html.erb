@@ -23,46 +23,46 @@
           ようこそ<%= current_customer.first_name %>さん！
       </li>
       <li class="nav-item">
-        <%= link_to "マイページ", customer_path(current_customer), class:'fas fa-home text-white m-2' %>
+        <%= link_to "マイページ", customer_path(current_customer), class:'text-white m-2' %>
       </li>
       <li class="nav-item">
-        <%= link_to "商品一覧", items_path, class: 'fas fa-users text-white m-2' %>
+        <%= link_to "商品一覧", items_path, class: 'text-white m-2' %>
       </li>
       <li class="nav-item">
-        <%= link_to "カート", cart_items_path, class:'fas fa-book-open text-white m-2' %>
+        <%= link_to "カート", cart_items_path, class:'text-white m-2' %>
       </li>
       <li class="nav-item">
-        <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:'fas fa-sign-out-alt text-white m-2' %>
+        <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:'text-white m-2' %>
       </li>
     <% elsif admin_signed_in?  %>
       <li class="nav-item">
-        <%= link_to "商品一覧", admin_items_path, class:'fas fa-home text-white m-2' %>
+        <%= link_to "商品一覧", admin_items_path, class:'text-white m-2' %>
       </li>
       <li class="nav-item">
-        <%= link_to "会員一覧", admin_customers_path, class: 'fas fa-users text-white m-2' %>
+        <%= link_to "会員一覧", admin_customers_path, class: 'text-white m-2' %>
       </li>
       <li class="nav-item">
-        <%= link_to "注文履歴一覧", top_admin_homes_path, class:'fas fa-book-open text-white m-2' %>
+        <%= link_to "注文履歴一覧", top_admin_homes_path, class:'text-white m-2' %>
       </li>
       <li class="nav-item">
-        <%= link_to "ジャンル一覧",  admin_genres_path, class:'fas fa-sign-out-alt text-white m-2' %>
+        <%= link_to "ジャンル一覧",  admin_genres_path, class:'text-white m-2' %>
       </li>
       <li class="nav-item">
-        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:'fas fa-sign-out-alt text-white m-2' %>
+        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:'text-white m-2' %>
       </li>
 
     <% else %>
       <li class="nav-item">
-        <%= link_to "Home", root_path, class: "fas fa-home text-white m-2" %>
+        <%= link_to "Home", root_path, class: "text-white m-2" %>
         </li>
       <li class="nav-item">
-        <%= link_to "About", about_homes_path, class:"fas fa-link text-white m-2" %>
+        <%= link_to "About", about_homes_path, class:"text-white m-2" %>
       </li>
       <li class="nav-item">
-        <%= link_to "sign up", new_customer_registration_path, class:"fas fa-user-plus text-white m-2 " %>
+        <%= link_to "sign up", new_customer_registration_path, class:"text-white m-2 " %>
       </li>
       <li class="nav-item">
-        <%= link_to "login", new_customer_session_path, class:"fas fa-sign-in-alt text-white m-2 " %>
+        <%= link_to "login", new_customer_session_path, class:"text-white m-2 " %>
       </li>
     <% end %>
     </ul>
@@ -84,4 +84,11 @@
   <body>
     <%= yield %>
   </body>
+
+  <footer>
+      <div>
+      <p class="text-center bg-dark text-white mb-0">CopyRight NaganoCake.inc</p>
+      </div>
+  </footer>
+
 </html>
