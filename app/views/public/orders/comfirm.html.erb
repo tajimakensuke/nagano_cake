@@ -16,7 +16,7 @@
             <td>小計</td>
           </tr>
         </thead>
-
+      <% @total = 0 %>
       <% @cart_items.each do |cart_item| %>
       <% @total += cart_item.item.price.to_i * cart_item.amount.to_i %>
       <tr>
@@ -44,7 +44,7 @@
 
         </tr>
           <td>請求金額</td>
-          <td><%= @total + 800 %> </td>
+          <td><%= @order.total_payment = @total + 800 %> </td>
 
         </tr>
       </table>
