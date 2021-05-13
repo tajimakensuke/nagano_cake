@@ -8,10 +8,17 @@ class Admin::OrdersController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
-    @order.update(order_params)
-      redirect_to top_admin_homes_path
-      
+    @order_details = @order.orders_details
 
+      if @order.update(status: "confirmation")
+        @order_details.each do |orders_detail|
+          orders_detail.update(making_status: "waiting")
+        end
+      end
+
+
+     @order.update(order_params)
+      redirect_to top_admin_homes_path
   end
 
 

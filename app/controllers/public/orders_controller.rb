@@ -14,7 +14,7 @@ class Public::OrdersController < ApplicationController
     @order.customer_id = current_customer.id
     @cart_items = current_customer.cart_items
 
-    @total = 0
+    
     @cart_items.each do |cart_item|
     end
     @order.status = :waiting
